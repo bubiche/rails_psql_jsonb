@@ -2,6 +2,8 @@
 
 Some helpers to work with PostgreSQL's jsonb field for Ruby on Rails' Active Record.
 
+Inspired by https://github.com/madeintandem/jsonb_accessor and https://github.com/antoinemacia/atomic_json
+
 ## Usage
 
 More examples in the `spec` folder
