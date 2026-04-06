@@ -27,8 +27,8 @@ module RailsPsqlJsonb
     end
 
     class NoOrderKey < StandardError
-      def initialize(attribute:)
-        super("order json keys should not be empty")
+      def initialize
+        super("order json_keys must be a non-empty array")
       end
     end
 

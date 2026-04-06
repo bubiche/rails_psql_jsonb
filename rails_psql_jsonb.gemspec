@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
   spec.email = ["bubiche95@gmail.com"]
   spec.platform = "java" if is_java
 
-  spec.summary = "Rails Active Record helper to deal with jsonb columns in Postgresql."
-  spec.description = "Helper for querying and updating Postgresql jsonb with ActiveRecord."
+  spec.summary = "ActiveRecord helpers for querying and atomically updating PostgreSQL JSONB columns."
+  spec.description = "Provides jsonb_where, jsonb_order, and atomic update methods (jsonb_update!, jsonb_delete_key, jsonb_array_append, jsonb_increment, and more) for PostgreSQL JSONB columns in Rails ActiveRecord. Generates safe, type-cast SQL with no lost-update race conditions under concurrency."
   spec.homepage = "https://github.com/bubiche/rails_psql_jsonb"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3"
@@ -42,4 +42,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "database_cleaner-active_record", "~> 2.1"
 end

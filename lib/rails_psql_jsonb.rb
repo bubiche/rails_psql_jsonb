@@ -6,6 +6,7 @@ require "active_record/connection_adapters/postgresql_adapter"
 
 require_relative "rails_psql_jsonb/version"
 require_relative "rails_psql_jsonb/errors"
+require_relative "rails_psql_jsonb/quoting"
 require_relative "rails_psql_jsonb/query_helpers"
 require_relative "rails_psql_jsonb/querying"
 require_relative "rails_psql_jsonb/atomic_update"

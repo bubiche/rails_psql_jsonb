@@ -29,13 +29,28 @@ module RailsPsqlJsonb
       "=" => "=",
       :contains => "@>",
       "contains" => "@>",
-      :"@>" =>"@>",
-      "@>" =>"@>"
+      :"@>" => "@>",
+      "@>" => "@>",
+      :exists => "?",
+      "exists" => "?",
+      :"?" => "?",
+      "?" => "?",
+      :exists_any => "?|",
+      "exists_any" => "?|",
+      :"?|" => "?|",
+      "?|" => "?|",
+      :exists_all => "?&",
+      "exists_all" => "?&",
+      :"?&" => "?&",
+      "?&" => "?&"
     }.freeze
-
 
     def self.numeric_operator?(query_operator)
       [">", "<", ">=", "<="].include?(query_operator)
+    end
+
+    def self.existence_operator?(query_operator)
+      ["?", "?|", "?&"].include?(query_operator)
     end
 
     def self.validate_operator!(operator)
@@ -60,10 +75,12 @@ module RailsPsqlJsonb
 
       raise TypeError, "Atomic update input must be a hash" unless input.is_a?(Hash)
 
-      input.each_key do |key|
-        raise RailsPsqlJsonb::Errors::ReadOnlyAttribute(attribute: key) if record.class.readonly_attributes.include?(key.to_s)
+      input.each do |key, payload|
+        raise RailsPsqlJsonb::Errors::ReadOnlyAttribute.new(attribute: key) if record.class.readonly_attributes.include?(key.to_s)
 
         validate_column_name!(record.class, db_column_name(record.class, key))
+
+        raise ArgumentError, "payload for column #{key} must not be empty" if payload.is_a?(Hash) && payload.empty?
       end
     end
 
